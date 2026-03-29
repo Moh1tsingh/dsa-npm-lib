@@ -1,38 +1,34 @@
-const LinkedList = require("../Linked-List/LinkedList");
+import { LinkedList } from "../Linked-List/LinkedList.js";
 
-class Queue {
+export class Queue<T> {
+  private queue: LinkedList<T>;
+
   constructor() {
-    this.queue = new LinkedList();
+    this.queue = new LinkedList<T>();
   }
 
-  push(value) {
+  push(value: T): void {
     this.queue.createNew(value);
   }
 
-  pop() {
+  pop(): T {
     if (this.queue.size() === 0) throw "Queue is empty";
     return this.queue.popFirst();
   }
 
-  top() {
+  top(): T {
     if (this.queue.size() === 0) throw "Queue is empty";
     return this.queue.getFirst();
   }
 
-  isEmpty() {
+  isEmpty(): boolean {
     return this.queue.size() === 0;
   }
 
-  show() {
+  show(): T[] {
     if (this.queue.size() === 0) throw "Queue is empty";
     return this.queue.show();
   }
 }
 
-// const q = new Queue
-// q.push(34)
-// console.log(q.show())
-// console.log(q.pop())
-// console.log(q.show())
-
-module.exports = Queue;
+export default Queue;

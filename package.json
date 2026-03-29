@@ -1,10 +1,32 @@
 {
   "name": "dsa-with-javascript",
-  "version": "1.0.3",
-  "description": "dsa library in js",
-  "main": "index.js",
+  "version": "2.0.0",
+  "description": "Data Structures and Algorithms library with TypeScript support",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/cjs/index.d.ts",
+  "exports": {
+    ".": {
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      },
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      }
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build": "npm run clean && npm run build:cjs && npm run build:esm && node scripts/post-build.js",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run build",
+    "typecheck": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
@@ -13,12 +35,18 @@
   "keywords": [
     "dsajs",
     "dsa-js",
-    "dsa-with-javascript"
+    "dsa-with-javascript",
+    "typescript",
+    "data-structures",
+    "algorithms"
   ],
   "author": "moh1tsingh",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Moh1tsingh/dsa-npm-lib/issues"
   },
-  "homepage": "https://github.com/Moh1tsingh/dsa-npm-lib#readme"
+  "homepage": "https://github.com/Moh1tsingh/dsa-npm-lib#readme",
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
 }

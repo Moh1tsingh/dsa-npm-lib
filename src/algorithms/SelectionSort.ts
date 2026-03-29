@@ -1,7 +1,9 @@
-function SelectionSort(array, order = 1) {
+type SortOrder = 1 | -1;
+
+export function SelectionSort(array: number[], order: SortOrder = 1): number[] {
   if (!Array.isArray(array)) throw "Given input is not an array";
   if (array.length <= 1) return array;
-  if (order == 1) {
+  if (order === 1) {
     for (let i = 0; i < array.length; i++) {
       let min_index = i;
       for (let j = i + 1; j < array.length; j++) {
@@ -9,11 +11,11 @@ function SelectionSort(array, order = 1) {
           min_index = j;
         }
       }
-      min_value = array.splice(min_index, 1);
+      const min_value = array.splice(min_index, 1);
       array.unshift(min_value[0]);
     }
     return array;
-  } else if (order == -1) {
+  } else if (order === -1) {
     for (let i = 0; i < array.length; i++) {
       let min_index = i;
       for (let j = i + 1; j < array.length; j++) {
@@ -21,7 +23,7 @@ function SelectionSort(array, order = 1) {
           min_index = j;
         }
       }
-      min_value = array.splice(min_index, 1);
+      const min_value = array.splice(min_index, 1);
       array.unshift(min_value[0]);
     }
     return array;
@@ -30,4 +32,4 @@ function SelectionSort(array, order = 1) {
   }
 }
 
-module.exports = SelectionSort;
+export default SelectionSort;

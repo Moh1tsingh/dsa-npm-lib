@@ -1,27 +1,31 @@
-const ListNode = require("./Node");
+import { ListNode } from "./ListNode.js";
 
-class LinkedList {
-  //To create a linked list of nodes
-  constructor(head = null) {
-    if (!head) this.head = head;
-    else {
+export class LinkedList<T> {
+  head: ListNode<T> | null;
+
+  constructor(head?: T) {
+    if (head === undefined || head === null) {
+      this.head = null;
+    } else {
       this.head = new ListNode(head);
     }
   }
-  createNew(val) {
+
+  createNew(val: T): ListNode<T> {
     if (!this.head) {
       this.head = new ListNode(val);
-      return this.head
+      return this.head;
     } else {
       let node = this.head;
       while (node.next) {
         node = node.next;
       }
       node.next = new ListNode(val);
-      return node.next
+      return node.next;
     }
   }
-  size() {
+
+  size(): number {
     let count = 0;
     let node = this.head;
     while (node) {
@@ -30,10 +34,13 @@ class LinkedList {
     }
     return count;
   }
-  getFirst() {
+
+  getFirst(): T {
+    if (!this.head) throw "List is empty";
     return this.head.data;
   }
-  getLast() {
+
+  getLast(): T | null {
     let node = this.head;
     if (!node) return null;
     while (node.next) {
@@ -41,32 +48,37 @@ class LinkedList {
     }
     return node.data;
   }
-  popLast() {
+
+  popLast(): T | null {
     let node = this.head;
     if (!node) return null;
-    if(!node.next){
-      let poppedNode = node.data
-      this.head = null
-      return poppedNode
+    if (!node.next) {
+      const poppedNode = node.data;
+      this.head = null;
+      return poppedNode;
     }
-    let prev = null
+    let prev: ListNode<T> | null = null;
     while (node.next) {
-      prev = node
+      prev = node;
       node = node.next;
     }
-    prev.next = null
+    prev!.next = null;
     return node.data;
   }
-  popFirst() {
-    let poppedNode = this.head.data;
-    this.head = this.head.next
+
+  popFirst(): T {
+    if (!this.head) throw "List is empty";
+    const poppedNode = this.head.data;
+    this.head = this.head.next;
     return poppedNode;
   }
-  clear() {
+
+  clear(): void {
     this.head = null;
   }
-  show() {
-    let res = [];
+
+  show(): T[] {
+    const res: T[] = [];
     let node = this.head;
     while (node) {
       res.push(node.data);
@@ -76,13 +88,4 @@ class LinkedList {
   }
 }
 
-// let list = new LinkedList(69)
-// list.createNew(23)
-// list.createNew(25)
-// list.createNew(27)
-// list.createNew(29)
-// console.log(list.show())
-// console.log((list.popFirst()))
-// console.log(list.show())
-
-module.exports = LinkedList;
+export default LinkedList;

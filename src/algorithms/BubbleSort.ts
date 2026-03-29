@@ -1,22 +1,24 @@
-function BubbleSort(array, order = 1) {
+type SortOrder = 1 | -1;
+
+export function BubbleSort(array: number[], order: SortOrder = 1): number[] {
   if (!Array.isArray(array)) throw "Given input is not an array";
   if (array.length <= 1) return array;
-  if (order == 1) {
+  if (order === 1) {
     for (let i = 0; i < array.length; i++) {
       for (let j = 0; j < array.length - i - 1; j++) {
         if (array[j] > array[j + 1]) {
-          let temp = array[j];
+          const temp = array[j];
           array[j] = array[j + 1];
           array[j + 1] = temp;
         }
       }
     }
     return array;
-  } else if (order == -1) {
+  } else if (order === -1) {
     for (let i = 0; i < array.length; i++) {
       for (let j = 0; j < array.length - i - 1; j++) {
         if (array[j] < array[j + 1]) {
-          let temp = array[j];
+          const temp = array[j];
           array[j] = array[j + 1];
           array[j + 1] = temp;
         }
@@ -28,4 +30,4 @@ function BubbleSort(array, order = 1) {
   }
 }
 
-module.exports = BubbleSort;
+export default BubbleSort;

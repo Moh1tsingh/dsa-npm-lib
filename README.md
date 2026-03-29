@@ -1,144 +1,170 @@
 # DSA With JavaScript
 
-dsa-with-javascript is DSA library written in javascript and provides basic data structures like Stack,Queue and Linked List along with some sorting and searching algorithms
+dsa-with-javascript is a DSA library written in TypeScript that provides basic data structures like Stack, Queue and Linked List along with sorting, searching, and graph traversal algorithms. Works with JavaScript, TypeScript, Node.js, React, and Next.js.
 
 ## Installation
-
-Use the package manager npm to install dsa-with-javascript.
 
 ```bash
 npm install dsa-with-javascript
 ```
 
 ## Usage
-### Available data structures 
-#### 1.Stack
-```javascript
-//Stack uses Linked-List inside
-const {Stack} = require('dsa-with-javascript')
 
-const stack = new Stack() // Create a new instance of class Stack
-stack.push(10) // Add new element in stack
-stack.pop() //Pops the last element from stack
-stack.top() //Returns the top element
-stack.isEmpty() //Returns true is stack is empty else false
-stack.show() // Returns the stack
-```
-#### 2.Queue
+### JavaScript (CommonJS)
 ```javascript
-//Queue uses Linked-List inside
-const {Queue} = require('dsa-with-javascript')
-
-const queue = new Queue() // Create a new instance of class Queue
-queue.push(10) // Add new element in queue
-queue.pop() //Pops the first element from queue
-queue.top() //Returns the top element
-queue.isEmpty() //Returns true is queue is empty else false
-queue.show() // Returns the queue
-```
-#### 3.Linked List
-```javascript
-const {LinkedList} = require('dsa-with-javascript')
-
-// Create a new instance of class LinkedList
-// new LinkedList() creates head with null value
-// new LinkedList(10) creates linked list with 1 node with data = 10
-const list = new LinkedList()
-list.createNew(20) //Adds new node to the list with given value(20)
-list.size() //Returns the size of the linked list
-list.getFirst() //Returns the data of first node of the linked list
-list.getLast() //Returns the data of last node of the linked list
-list.clear() //Clears the linked list (assigns head = null)
-list.show() //Returns an array containing data of all nodes of linked list
+const { Stack, BubbleSort } = require('dsa-with-javascript')
 ```
 
-### Available algorithms
-#### 1.Binary Search 
-```javascript
-const {BinarySearch} = require('dsa-with-javascript')
-let arr = [1,2,3,4,5]
-BinarySearch(arr,5) //The BinarySearch function takes two arguments 1.The array and 2.Key
-```
-The BinarySearch function expects a sorted array as input, If not given the array is sorted by the function.
-The result is the index of the key element if found (of sorted array) else -1 if not found
-#### 2.Linear Search 
-```javascript
-const {LinearSearch} = require('dsa-with-javascript')
-let arr = [1,2,3,4,5]
-LinearSearch(arr,5) //The LinearSearch function takes two arguments 1.The array and 2.Key
-```
-The LinearSearch function returns the index of element if found otherwise -1 if not found
-
-#### 3.BubbleSort
-```javascript
-const {BubbleSort} = require('dsa-with-javascript')
-let arr = [1,2,3,4,5]
-BubbleSort(arr) //Returns the sorted array in ascending order
-BubbleSort(arr,-1) //Returns the sorted array in descending order
+### TypeScript / ES Modules
+```typescript
+import { Stack, BubbleSort, LinkedList } from 'dsa-with-javascript'
 ```
 
-#### 4.InsertionSort
-```javascript
-const {InsertionSort} = require('dsa-with-javascript')
-let arr = [1,2,3,4,5]
-InsertionSort(arr) //Returns the sorted array in ascending order
-InsertionSort(arr,-1) //Returns the sorted array in descending order
+All data structures support generics in TypeScript:
+```typescript
+const stack = new Stack<number>()
+const queue = new Queue<string>()
+const list = new LinkedList<{ id: number; name: string }>()
 ```
 
-#### 5.MergeSort
-```javascript
-const {MergeSort} = require('dsa-with-javascript')
-let arr = [1,2,3,4,5]
-MergeSort(arr) //Returns the sorted array in ascending order
-MergeSort(arr,-1) //Returns the sorted array in descending order
+---
+
+### Available Data Structures
+
+#### 1. Stack
+```typescript
+import { Stack } from 'dsa-with-javascript'
+
+const stack = new Stack<number>()
+stack.push(10)      // Add element to top
+stack.pop()         // Remove and return top element
+stack.top()         // Return top element without removing
+stack.isEmpty()     // Returns true if stack is empty
+stack.show()        // Returns the stack as an array
 ```
 
-#### 6.QuickSort
-```javascript
-const {QuickSort} = require('dsa-with-javascript')
-let arr = [1,2,3,4,5]
-QuickSort(arr) //Returns the sorted array in ascending order
-QuickSort(arr,-1) //Returns the sorted array in descending order
+#### 2. Queue
+```typescript
+import { Queue } from 'dsa-with-javascript'
+
+const queue = new Queue<number>()
+queue.push(10)      // Add element to rear
+queue.pop()         // Remove and return front element
+queue.top()         // Return front element without removing
+queue.isEmpty()     // Returns true if queue is empty
+queue.show()        // Returns the queue as an array
 ```
 
-#### 7.SelectionSort
-```javascript
-const {SelectionSort} = require('dsa-with-javascript')
-let arr = [1,2,3,4,5]
-SelectionSort(arr) //Returns the sorted array in ascending order
-SelectionSort(arr,-1) //Returns the sorted array in descending order
+#### 3. Linked List
+```typescript
+import { LinkedList } from 'dsa-with-javascript'
+
+const list = new LinkedList<number>()   // Empty list
+const list2 = new LinkedList<number>(10) // List with initial value
+list.createNew(20)   // Add new node with value 20
+list.size()          // Returns the size
+list.getFirst()      // Returns data of first node
+list.getLast()       // Returns data of last node
+list.popFirst()      // Remove and return first node's data
+list.popLast()       // Remove and return last node's data
+list.clear()         // Clear the list
+list.show()          // Returns array of all node values
 ```
 
-#### 8.BreadthFirstSearch
-```javascript
-const {BreadthFirstSearch} = require('dsa-with-javascript')
-graph = {
+---
+
+### Available Algorithms
+
+#### 1. Binary Search
+```typescript
+import { BinarySearch } from 'dsa-with-javascript'
+
+const arr = [1, 2, 3, 4, 5]
+BinarySearch(arr, 5)  // Returns index if found, -1 if not
+```
+The array is sorted automatically if not already sorted.
+
+#### 2. Linear Search
+```typescript
+import { LinearSearch } from 'dsa-with-javascript'
+
+const arr = [1, 2, 3, 4, 5]
+LinearSearch(arr, 5)  // Returns index if found, -1 if not
+```
+
+#### 3. BubbleSort
+```typescript
+import { BubbleSort } from 'dsa-with-javascript'
+
+BubbleSort([5, 3, 1, 4, 2])      // Ascending (default)
+BubbleSort([5, 3, 1, 4, 2], -1)  // Descending
+```
+
+#### 4. InsertionSort
+```typescript
+import { InsertionSort } from 'dsa-with-javascript'
+
+InsertionSort([5, 3, 1, 4, 2])      // Ascending
+InsertionSort([5, 3, 1, 4, 2], -1)  // Descending
+```
+
+#### 5. MergeSort
+```typescript
+import { MergeSort } from 'dsa-with-javascript'
+
+MergeSort([5, 3, 1, 4, 2])      // Ascending
+MergeSort([5, 3, 1, 4, 2], -1)  // Descending
+```
+
+#### 6. QuickSort
+```typescript
+import { QuickSort } from 'dsa-with-javascript'
+
+QuickSort([5, 3, 1, 4, 2])      // Ascending
+QuickSort([5, 3, 1, 4, 2], -1)  // Descending
+```
+
+#### 7. SelectionSort
+```typescript
+import { SelectionSort } from 'dsa-with-javascript'
+
+SelectionSort([5, 3, 1, 4, 2])      // Ascending
+SelectionSort([5, 3, 1, 4, 2], -1)  // Descending
+```
+
+#### 8. BreadthFirstSearch
+```typescript
+import { BreadthFirstSearch } from 'dsa-with-javascript'
+
+const graph = {
   A: ["B", "C"],
   B: ["A", "D", "E"],
   C: ["A", "F"],
   D: ["B"],
   E: ["B", "F"],
   F: ["C", "E"],
-};
-BreadthFirstSearch(graph, "A") //Takes two arguments - Graph and the starting node and returns an array of traversed nodes with bfs
+}
+BreadthFirstSearch(graph, "A")  // Returns array of traversed nodes
 ```
 
-#### 9.DepthFirstSearch
-```javascript
-const {DepthFirstSearch} = require('dsa-with-javascript')
-graph = {
+#### 9. DepthFirstSearch
+```typescript
+import { DepthFirstSearch } from 'dsa-with-javascript'
+
+const graph = {
   A: ["B", "C"],
   B: ["A", "D", "E"],
   C: ["A", "F"],
   D: ["B"],
   E: ["B", "F"],
   F: ["C", "E"],
-};
-DepthFirstSearch(graph, "A") //Takes two arguments - Graph and the starting node and returns an array of traversed nodes with dfs
+}
+DepthFirstSearch(graph, "A")  // Returns array of traversed nodes
 ```
+
 ## Contributing
 
 Pull requests are always welcome. For major changes, please open an issue first
 to discuss what you would like to change.
 
-This library is just a project created by [Moh1tsingh](https://github.com/Moh1tsingh) and is not intended for professional use.
+This library is a project created by [Moh1tsingh](https://github.com/Moh1tsingh).
